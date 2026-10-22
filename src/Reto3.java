@@ -1,6 +1,5 @@
 /**
- * Reto 3 (Versión B) - Lista circular: Reproducción en bucle.
- * Se completan insertar, rotar y eliminarActual.
+ * Reto 3VersiónB - Lista circular: Reproducción en bucle.
  */
 class NodoCircular {
     String cancion;
@@ -10,7 +9,7 @@ class NodoCircular {
 }
 
 class ListaCircular {
-    private NodoCircular actual; // canción en reproducción
+    private NodoCircular actual; // cancion en reproduccion
     private NodoCircular cola;
 
     /**
@@ -24,41 +23,41 @@ class ListaCircular {
             actual = nuevo;
             cola = nuevo;
         } else {
-            nuevo.siguiente = cola.siguiente; // TODO 2: el nuevo apunta a la cabeza (cola.siguiente)
-            cola.siguiente = nuevo;           //         y la cola apunta al nuevo
-            cola = nuevo;                     // TODO 3: el nuevo es la cola
+            nuevo.siguiente = cola.siguiente; // el nuevo apunta a la cabeza (cola.siguiente)
+            cola.siguiente = nuevo;           // y la cola apunta al nuevo
+            cola = nuevo;                     // el nuevo es la cola
         }
     }
 
     /**
-     * Avanza n canciones. No hace falta comprobar null "al final":
+     * Avanza n canciones. No hace falta comprobar null
      * en una lista circular nunca se llega a un final.
      */
     public void rotar(int n) {
         for (int i = 0; i < n; i++) {
-            if (actual != null) {          // TODO 4: solo protege el caso de lista vacía
+            if (actual != null) {          //solo protege el caso de lista vacía
                 actual = actual.siguiente;
             }
         }
     }
 
     /**
-     * Elimina la canción en reproducción y pasa a la siguiente.
+     * Elimina la cancion en reproduccion y pasa a la siguiente
      */
     public void eliminarActual() {
         if (cola == null) return;
         if (actual == actual.siguiente) {
-            // TODO 5: era el único nodo, la lista queda vacía
+            //era el único nodo, la lista queda vacía
             actual = null;
             cola = null;
             return;
         }
-        // TODO 6: busca el nodo anterior a 'actual' recorriendo el círculo
+        //busca el nodo anterior a actual recorriendo el circulo
         NodoCircular anterior = actual;
         while (anterior.siguiente != actual) {
             anterior = anterior.siguiente;
         }
-        // TODO 7: salta 'actual', corrige la cola si hacía falta y avanza
+        //salta actual corrige la cola si hacia falta y avanza
         anterior.siguiente = actual.siguiente;
         if (actual == cola) {
             cola = anterior;
@@ -66,7 +65,7 @@ class ListaCircular {
         actual = actual.siguiente;
     }
 
-    /** Muestra una vuelta completa empezando en la canción en reproducción. */
+    /** Muestra una vuelta completa empezando en la canción en reproduccion */
     public void mostrarUnaVuelta() {
         if (actual == null) {
             System.out.println("(lista vacia)");
@@ -85,7 +84,6 @@ public class Reto3 {
     public static void main(String[] args) {
         ListaCircular lista = new ListaCircular();
 
-        // Datos propios (cámbienlos por los de su bina)
         lista.insertar("Livin' on a Prayer");
         lista.insertar("Dancing Queen");
         lista.insertar("Take On Me");
@@ -102,7 +100,7 @@ public class Reto3 {
         System.out.println("\nEliminar la que suena (intermedia):");
         lista.mostrarUnaVuelta();
 
-        // Tras eliminar, 'actual' avanzo y ahora es justo la cola
+        // Tras eliminar actual avanzo y ahora es justo la cola
         lista.eliminarActual();
         System.out.println("\nEliminar la cola:");
         lista.mostrarUnaVuelta();
